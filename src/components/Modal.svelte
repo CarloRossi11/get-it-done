@@ -26,6 +26,7 @@
        margin: 10% auto;
        text-align: center;
        background: white;
+       line-height: 125%;
    }
    .promo .modal{
        background: crimson;
