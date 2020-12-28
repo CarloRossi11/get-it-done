@@ -1,9 +1,10 @@
 <svelte:head>
-	<title>Do It</title>
+	<title>Get It Done</title>
 </svelte:head>
 
 <script>
-	import  Card  from './components/Card.svelte'
+	import Card   from './components/Card.svelte'
+	import Modal  from './components/Modal.svelte'
 	import Header from './components/Header.svelte'
 	import Footer from './components/Footer.svelte'
 	import Button from './components/Button.svelte'
@@ -43,10 +44,18 @@
     function updateTodo(index) {
         const {item, itemId} = todos[index];
         todoPromise = userbase.updateItem({databaseName, itemId, item});
-    }
+	}
+	
+	// Modal
+	let showModal = false
+	const toggleModal = () => {
+	  showModal = !showModal
+	}
 </script>
-<Header/>
+
 <body>
+<Modal {showModal} on:click={toggleModal}>Hey Yall Im A Modal</Modal>
+<Header/>
 	{#await authPromise}
 	<div in:fade out:slide><Loader/></div>
 	{:then _}
@@ -56,22 +65,25 @@
 			<input id="username" type="text" bind:value={username}><br>
 			<label for="password">Password</label>
 			<input id="password" type="password" bind:value={password}><br>
-			<Button on:click={signIn} >Sign in</Button>
-			<Button on:click={signUp} >Sign up</Button>
+			<div class="cluster">
+				<Button on:click={signIn} >Sign in</Button>
+				<Button on:click={signUp} >Sign up</Button>
+			</div>
 		</form>
+		<div class="cluster"><Button type='secondary' on:click={toggleModal}>About</Button></div>
 		{:else}
 			<h1 in:slide>Hi, {userObject.username}!</h1>
-			<Button on:click={signOut}>Log out</Button>
 			{#await todoPromise}{:then _}
-				<label in:slide for="new-todo">New Todo</label><br/>
-				<input in:slide id="new-todo" type="text" bind:value={newTodo}>
-				<Button on:click={addTodo}>Add todo</Button><br>
-				{#each todos as {item, itemId}, index}
-				<Card>
-					<input in:slide type="text" bind:value={todos[index].item} on:blur={() => updateTodo(index)}>
-					<Button on:click={() => deleteTodo(itemId)}>X</Button><br>
-				</Card>
-				{/each}
+			<label in:slide for="new-todo">Here are your todos</label><br/>
+			<input in:slide id="new-todo" type="text" bind:value={newTodo}>
+			<Button on:click={addTodo}>Add todo</Button><br>
+			{#each todos as {item, itemId}, index}
+			<Card>
+				<input in:slide type="text" bind:value={todos[index].item} on:blur={() => updateTodo(index)}>
+				<Button on:click={() => deleteTodo(itemId)}>X</Button><br>
+			</Card>
+			{/each}
+			<div class="cluster"><Button inverse='true' on:click={signOut}>Log Out</Button></div>
 			{:catch error} Error! {error} {/await}
 		{/if}
 	{:catch error} Error! {error} {/await}
@@ -81,5 +93,11 @@
 <style>
 	body{
 		text-align: center;
+	}
+	form{
+		padding-top: 30px;
+	}
+	.cluster{
+		margin: 15px ;
 	}
 </style>

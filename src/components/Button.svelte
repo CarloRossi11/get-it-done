@@ -22,7 +22,7 @@
         color: white;
     }
     .secondary{
-        background: #45c496;
+        background: #0e2f56;
         color: white;
     }
     .flat{
@@ -34,8 +34,8 @@
         border: 2px solid #d91b42;
     }
     .secondary.inverse{
-        color: #45c496;
+        color: #0e2f56;
         background: white;
-        border: 2px solid #45c496;
+        border: 2px solid #0e2f56;
     }
 </style>
