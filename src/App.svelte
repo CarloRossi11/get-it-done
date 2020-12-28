@@ -54,7 +54,7 @@
 </script>
 
 <body>
-<Modal {showModal} on:click={toggleModal}>Welcome to Get It Done, where  Users can sign up and log in for full CRUD capabilites on their todo lists. Built by Carlo Berardelli in December 2020 using <a href="https://svelte.dev/">Svelte</a> for the client side, and <a href="https://userbase.com/">Userbase</a> for the DB & authentication. This todo app is built to demonstrate many of the Svelte features and functionalities. These features include: slot, bind, transitions, #if, #each, #await, $:, and a pretty cool loading animation. <br> <a href="">GitHub</a> <br><a href="https://portfolio-alpha-orpin.vercel.app/">Carlo's Portfolio</a>  </Modal>
+<Modal {showModal} on:click={toggleModal}>Welcome to Get It Done, where  Users can sign up and log in for full CRUD capabilites on their todo lists. Built by Carlo Berardelli in December 2020 using <a href="https://svelte.dev/">Svelte</a> for the client side, and <a href="https://userbase.com/">Userbase</a> for the DB & authentication. This todo app is built to demonstrate many of the Svelte features and functionalities. These features include: slot, bind, transitions, #if, #each, #await, $:, and a pretty cool loading animation. <br> <a href="https://github.com/CarloRossi11/get-it-done">GitHub</a> <br><a href="https://portfolio-alpha-orpin.vercel.app/">Carlo's Portfolio</a>  </Modal>
 <Header/>
 	{#await authPromise}
 	<div in:fade out:slide><Loader/></div>
